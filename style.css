@@ -1,8 +1,9 @@
-table, td, th{
-    border: 1px solid;
+table,
+td,
+th {
+  border: 1px solid;
 }
 
-table{
-    border-collapse: collapse;
-    width: 500px;
+table {
+  border-collapse: collapse;
 }

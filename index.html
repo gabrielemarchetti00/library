@@ -10,13 +10,40 @@
 </head>
 <body>
     <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Read</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Read</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
     </table>
-    
+    <button id="newBookButton">NEW BOOK</button>
+    <form action="./index.html" method="post" hidden>
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title">
+        </div>
+        <div>
+            <label for="author">Author:</label>
+            <input type="text" id="author">
+        </div>
+        <div>
+            <label for="pages">Pages:</label>
+            <input type="number" id="pages">            
+        </div>
+        <div>
+            <label for="read-yes">Read</label>
+            <input type="radio" id="read-yes">
+            <label for="read-no">Not read yet</label>
+            <input type="radio" id="read-no">
+        </div>
+        <button type="submit" id="submitButton">Submit</button>
+    </form>
 </body>
 </html>
