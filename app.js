@@ -8,9 +8,8 @@ function Book(title, author, pages, read, pos) {
   this.pos = pos;
 }
 
-//to fix
-function addBookToLibrary(t, a, p, r) {
-  const book = new Book(t, a, p, r);
+function addBookToLibrary(t, a, p, r, pos) {
+  const book = new Book(t, a, p, r, pos);
   myLibrary.push(book);
   return book;
 }
@@ -33,18 +32,31 @@ function showBooks(library) {
       tr.appendChild(td);
     }
 
+    //add button change read status
+    const td1 = document.createElement("td");
+    const readBtn = document.createElement("button");
+    readBtn.setAttribute("class", "readButton");
+    //removeBtn and readBtn cant have same id
+    readBtn.setAttribute("id", `${library[i].pos}*`);
+    readBtn.textContent = "click";
+    td1.appendChild(readBtn);
+    tr.appendChild(td1);
+
     //associate dom elem with book
+    const td2 = document.createElement("td");
     const removeBtn = document.createElement("button");
     removeBtn.setAttribute("class", "removeButton");
     removeBtn.setAttribute("id", library[i].pos);
     removeBtn.textContent = "X";
-    tr.appendChild(removeBtn);
-
-    setRemove();
+    td2.appendChild(removeBtn);
+    tr.appendChild(td2);
   }
+
+  prepareRemove();
+  prepareChangeReadStatus();
 }
 
-function setRemove() {
+function prepareRemove() {
   let removeBtns = document.querySelectorAll(".removeButton");
   removeBtns.forEach((removeBtn) => {
     removeBtn.addEventListener("click", () => {
@@ -54,6 +66,27 @@ function setRemove() {
         }
       }
       //clear table then reload updated
+      const tbody = document.querySelector("tbody");
+      tbody.innerHTML = "";
+      showBooks(myLibrary);
+    });
+  });
+}
+
+function prepareChangeReadStatus() {
+  let readBtns = document.querySelectorAll(".readButton");
+  readBtns.forEach((readBtn) => {
+    readBtn.addEventListener("click", () => {
+      for (const i in myLibrary) {
+        if (readBtn.id == `${myLibrary[i].pos}*`) {
+          //change book read status
+          if (myLibrary[i].read == "yes") {
+            myLibrary[i].read = "no";
+          } else if (myLibrary[i].read == "no") {
+            myLibrary[i].read = "yes";
+          }
+        }
+      }
       const tbody = document.querySelector("tbody");
       tbody.innerHTML = "";
       showBooks(myLibrary);
@@ -86,7 +119,7 @@ submitBtn.addEventListener("click", (e) => {
   }
 
   let posInLibrary = myLibrary.length + 1;
-  let book = addBookToLibrary(
+  addBookToLibrary(
     title.value,
     author.value,
     pages.value,
