@@ -114,8 +114,7 @@ btn.addEventListener("click", () => {
   form.style.display = "block";
 });
 
-const submitBtn = document.querySelector("#submitButton");
-submitBtn.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
   let title = document.querySelector("#title");
   let author = document.querySelector("#author");
